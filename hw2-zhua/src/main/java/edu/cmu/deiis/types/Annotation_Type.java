@@ -12,8 +12,9 @@ import org.apache.uima.cas.Type;
 import org.apache.uima.cas.impl.FeatureImpl;
 import org.apache.uima.cas.Feature;
 
-/** 
- * Updated by JCasGen Sat Sep 21 13:22:34 EDT 2013
+/** Basic Type for annotation, including casProcessID and confidence score
+
+ * Updated by JCasGen Mon Sep 23 22:28:19 EDT 2013
  * @generated */
 public class Annotation_Type extends org.apache.uima.jcas.tcas.Annotation_Type {
   /** @generated */

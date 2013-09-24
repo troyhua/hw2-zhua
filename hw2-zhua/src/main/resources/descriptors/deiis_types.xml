@@ -7,7 +7,8 @@
   <types>
     <typeDescription>
       <name>edu.cmu.deiis.types.Annotation</name>
-      <description/>
+      <description>Basic Type for annotation, including casProcessID and confidence score
+</description>
       <supertypeName>uima.tcas.Annotation</supertypeName>
       <features>
         <featureDescription>
@@ -95,7 +96,7 @@
     </typeDescription>
   <typeDescription>
       <name>edu.cmu.deiis.types.EvaluationType</name>
-      <description/>
+      <description>For showing the precision at N score for a scoring component.</description>
       <supertypeName>edu.cmu.deiis.types.Annotation</supertypeName>
       <features>
         <featureDescription>
