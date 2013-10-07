@@ -12,6 +12,7 @@
     <typeSystemDescription>
       <imports>
         <import name="descriptors.deiis_types"/>
+      <import name="org.cleartk.ne.type.NamedEntityMention"/>
       </imports>
     </typeSystemDescription>
     <typePriorities/>
@@ -21,6 +22,7 @@
         <inputs>
           <type allAnnotatorFeatures="true">edu.cmu.deiis.types.Question</type>
           <type allAnnotatorFeatures="true">edu.cmu.deiis.types.Answer</type>
+        <type allAnnotatorFeatures="true">org.cleartk.ne.type.NamedEntityMention</type>
         </inputs>
         <outputs>
           <type allAnnotatorFeatures="true">edu.cmu.deiis.types.AnswerScore</type>

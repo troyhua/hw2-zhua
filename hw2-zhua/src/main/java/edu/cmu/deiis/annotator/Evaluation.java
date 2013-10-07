@@ -31,9 +31,9 @@ public class Evaluation extends JCasAnnotator_ImplBase{
     Collections.sort(scores, new Comparator<AnswerScore>(){
       public int compare(AnswerScore s1, AnswerScore s2){
         if (s1.getScore() > s2.getScore())
-          return 1;
-        else
           return -1;
+        else
+          return 1;
       }
     });
     int trueCorrect = 0;

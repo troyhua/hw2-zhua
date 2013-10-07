@@ -7,11 +7,11 @@ import org.apache.uima.analysis_component.JCasAnnotator_ImplBase;
 import org.apache.uima.analysis_engine.AnalysisEngineProcessException;
 import org.apache.uima.cas.FSIndex;
 import org.apache.uima.jcas.JCas;
+import org.cleartk.ne.type.NamedEntityMention;
 
 import edu.cmu.deiis.types.Answer;
 import edu.cmu.deiis.types.AnswerScore;
 import edu.cmu.deiis.types.Question;
-import edu.cmu.deiis.types.Token;
 
 public class ScoreAnnotator extends JCasAnnotator_ImplBase{
 
@@ -20,6 +20,20 @@ public class ScoreAnnotator extends JCasAnnotator_ImplBase{
     FSIndex questionIndex = aJCas.getAnnotationIndex(Question.type);
     Iterator<Question> questionIter = questionIndex.iterator();
     Question question = (Question)questionIter.next();
+    
+    FSIndex nameMentionIndex = aJCas.getAnnotationIndex(NamedEntityMention.type);
+    Iterator<NamedEntityMention> nameMentionIter = nameMentionIndex.iterator();
+    
+    int questionNameCount = 0;
+    
+    while (nameMentionIter.hasNext()){
+      NamedEntityMention name = nameMentionIter.next();
+      int begin = name.getBegin();
+      if (begin >= question.getBegin() && begin <= question.getEnd()){
+        questionNameCount += 1;
+      }
+    }
+    
     
     FSIndex answerIndex = aJCas.getAnnotationIndex(Answer.type);
     Iterator<Answer> answerIter = answerIndex.iterator();
@@ -35,6 +49,21 @@ public class ScoreAnnotator extends JCasAnnotator_ImplBase{
           unigram += 1;
       
       double uniScore = (double)unigram / ans.getTokens().size();
+      
+      
+      nameMentionIter = nameMentionIndex.iterator();
+      int answerNameCount = 0;
+      while (nameMentionIter.hasNext()){
+        NamedEntityMention name = nameMentionIter.next();
+        int begin = name.getBegin();
+        if (begin >= ans.getBegin() && begin <= ans.getEnd()){
+          answerNameCount += 1;
+        }
+      }
+      
+      if (questionNameCount == answerNameCount){
+        uniScore *= 1.1;
+      }
       
       AnswerScore finalScore = new AnswerScore(aJCas);
       
